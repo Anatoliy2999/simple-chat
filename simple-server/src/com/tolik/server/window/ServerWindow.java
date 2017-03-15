@@ -4,9 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ServerWindow extends JFrame {
+    private JButton openRoomButton = new JButton("Open Room");
+    private JTextField roomField = new JTextField("World");
+    private JTextArea jMassage = new JTextArea();
+
     public ServerWindow() {
         setTitle("Server");
-        setSize(250, 250);
+        setSize(300, 300);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         initComponents();
@@ -14,19 +18,12 @@ public class ServerWindow extends JFrame {
     }
 
     private void initComponents() {
-        JButton openRoom = new JButton("Open Room");
-        JLabel labelRoom = new JLabel("World");
-
-        String[] massage = {"1", "2", "2", "2", "2"};
-
-        JScrollPane scrollPane = new JScrollPane();
-        JList<String> jMassage = new JList<String>(massage);
-
-        scrollPane.setViewportView(jMassage);
-        jMassage.setLayoutOrientation(JList.VERTICAL);
-
-        add(labelRoom, BorderLayout.PAGE_START);
+        jMassage.setEditable(false);
+        openRoomButton.addActionListener(e -> {
+            openRoomButton.setEnabled(false);
+        });
+        add(roomField, BorderLayout.PAGE_START);
         add(jMassage, BorderLayout.CENTER);
-        add(openRoom, BorderLayout.PAGE_END);
+        add(openRoomButton, BorderLayout.PAGE_END);
     }
 }

@@ -4,6 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ClientWindow extends JFrame {
+    private JTextField roomField = new JTextField();
+    private JLabel labelRoom = new JLabel("Room");
+    private JLabel labelName = new JLabel("Nick name");
+    private JTextField nameField = new JTextField();
+    private JButton connectButton = new JButton("Connect");
+    private JButton sendButton = new JButton("Send");
+    private JTextField inputField = new JTextField();
+    private JButton disconnectButton = new JButton("Disconnect");
+
+
     public ClientWindow() {
         setTitle("Client");
         setSize(250, 250);
@@ -14,28 +24,53 @@ public class ClientWindow extends JFrame {
     }
 
     private void initComponents() {
+        initConnectionComponent();
+        initSendComponent();
+    }
+
+    public void initConnectionComponent() {
+        JPanel connectionPanel = new JPanel();
+
+        connectionPanel.setLayout(new GridLayout(3, 2));
+        connectionPanel.add(labelRoom);
+        connectionPanel.add(roomField);
+        connectionPanel.add(labelName);
+        connectionPanel.add(nameField);
+
+        connectionPanel.add(connectButton);
+        connectionPanel.add(disconnectButton);
+
+        connectButton.addActionListener(e -> {
+            connectButton.setEnabled(false);
+            disconnectButton.setEnabled(true);
+            roomField.setEnabled(false);
+            nameField.setEnabled(false);
+            inputField.setEnabled(true);
+            sendButton.setEnabled(true);
+        });
+
+        disconnectButton.addActionListener(e -> {
+            disconnectButton.setEnabled(false);
+            connectButton.setEnabled(true);
+            roomField.setEnabled(true);
+            nameField.setEnabled(true);
+            inputField.setEnabled(false);
+            sendButton.setEnabled(false);
+        });
+
+        add(connectionPanel, BorderLayout.PAGE_START);
+    }
+
+    public void initSendComponent() {
         JPanel jPanel = new JPanel();
-        JPanel jPanel1 = new JPanel();
-        JButton send = new JButton("Send");
-        JTextField room = new JTextField();
-        JTextField inPut = new JTextField();
-        JLabel labelRoom = new JLabel("Room");
-        JLabel labelName = new JLabel("Nick name");
-        JTextField name = new JTextField();
-        JButton connect = new JButton("Connect");
+
+        inputField.setEnabled(false);
+        sendButton.setEnabled(false);
 
         jPanel.setLayout(new GridLayout(1, 2));
-        jPanel.add(inPut);
-        jPanel.add(send);
-
-        jPanel1.setLayout(new GridLayout(3, 2));
-        jPanel1.add(labelRoom);
-        jPanel1.add(room);
-        jPanel1.add(labelName);
-        jPanel1.add(name);
-        jPanel1.add(connect);
+        jPanel.add(inputField);
+        jPanel.add(sendButton);
 
         add(jPanel, BorderLayout.PAGE_END);
-        add(jPanel1, BorderLayout.PAGE_START);
     }
 }
