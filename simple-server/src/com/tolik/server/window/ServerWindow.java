@@ -7,6 +7,7 @@ public class ServerWindow extends JFrame {
     private JButton openRoomButton = new JButton("Open Room");
     private JTextField roomField = new JTextField("name Room");
     private JTextArea jMassage = new JTextArea();
+    private JScrollPane jScrollPane = new JScrollPane(jMassage);
 
     public ServerWindow() {
         setTitle("Server");
@@ -23,10 +24,12 @@ public class ServerWindow extends JFrame {
         openRoomButton.addActionListener(e -> {
             openRoomButton.setEnabled(false);
             roomField.setEnabled(false);
+            jMassage.setText("1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n");
         });
 
+        jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         add(roomField, BorderLayout.PAGE_START);
-        add(jMassage, BorderLayout.CENTER);
+        add(jScrollPane, BorderLayout.CENTER);
         add(openRoomButton, BorderLayout.PAGE_END);
     }
 }
