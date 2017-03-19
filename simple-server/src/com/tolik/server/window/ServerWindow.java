@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class ServerWindow extends JFrame {
     private JButton openRoomButton = new JButton("Open Room");
-    private JTextField roomField = new JTextField("World");
+    private JTextField roomField = new JTextField("name Room");
     private JTextArea jMassage = new JTextArea();
 
     public ServerWindow() {
@@ -19,9 +19,12 @@ public class ServerWindow extends JFrame {
 
     private void initComponents() {
         jMassage.setEditable(false);
+
         openRoomButton.addActionListener(e -> {
             openRoomButton.setEnabled(false);
+            roomField.setEnabled(false);
         });
+
         add(roomField, BorderLayout.PAGE_START);
         add(jMassage, BorderLayout.CENTER);
         add(openRoomButton, BorderLayout.PAGE_END);
