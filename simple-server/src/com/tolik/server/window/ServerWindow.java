@@ -24,7 +24,6 @@ public class ServerWindow extends JFrame {
         openRoomButton.addActionListener(e -> {
             openRoomButton.setEnabled(false);
             roomField.setEnabled(false);
-            jMassage.setText("1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n" + "1\n");
         });
 
         jScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
