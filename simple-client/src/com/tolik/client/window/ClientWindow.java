@@ -1,7 +1,10 @@
 package com.tolik.client.window;
 
+import com.tolik.client.network.ClientComponent;
+
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class ClientWindow extends JFrame {
     private JTextField roomField = new JTextField();
@@ -12,7 +15,7 @@ public class ClientWindow extends JFrame {
     private JButton sendButton = new JButton("Send");
     private JTextField inputField = new JTextField();
     private JButton disconnectButton = new JButton("Disconnect");
-
+    private ClientComponent clientComponent;
 
     public ClientWindow() {
         setTitle("Client");
@@ -41,12 +44,22 @@ public class ClientWindow extends JFrame {
         connectionPanel.add(disconnectButton);
 
         connectButton.addActionListener(e -> {
+            if (roomField.getText().isEmpty() || nameField.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please fill all field!!!");
+                return;
+            }
             connectButton.setEnabled(false);
             disconnectButton.setEnabled(true);
             roomField.setEnabled(false);
             nameField.setEnabled(false);
             inputField.setEnabled(true);
             sendButton.setEnabled(true);
+            try {
+                clientComponent = new ClientComponent();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+                JOptionPane.showMessageDialog(null,"Connection failed");
+            }
         });
 
         disconnectButton.addActionListener(e -> {
@@ -64,8 +77,17 @@ public class ClientWindow extends JFrame {
     public void initSendComponent() {
         JPanel jPanel = new JPanel();
 
+        sendButton.addActionListener(e -> {
+            String nikName = nameField.getText();
+            String massage = inputField.getText();
+            if (!massage.isEmpty()) {
+                JOptionPane.showMessageDialog(null, String.format("%s: %s", nikName, massage));
+            }
+        });
+
         inputField.setEnabled(false);
         sendButton.setEnabled(false);
+        disconnectButton.setEnabled(false);
 
         jPanel.setLayout(new GridLayout(1, 2));
         jPanel.add(inputField);
