@@ -22,8 +22,6 @@ public class ClientComponent {
         try {
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null, "So... We have a problem with close a socket((");
         }
     }
 }
