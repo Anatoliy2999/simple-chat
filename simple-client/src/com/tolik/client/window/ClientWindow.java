@@ -81,7 +81,7 @@ public class ClientWindow extends JFrame {
             String nikName = nameField.getText();
             String massage = inputField.getText();
             if (!massage.isEmpty()) {
-                JOptionPane.showMessageDialog(null, String.format("%s: %s", nikName, massage));
+                clientComponent.sendMessage(String.format("%s: %s", nikName, massage));
             }
         });
 

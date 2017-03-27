@@ -1,5 +1,6 @@
 package com.tolik.server.window;
 
+import com.tolik.server.network.ClientThread;
 import com.tolik.server.network.ServerComponent;
 
 import javax.swing.*;
@@ -12,6 +13,7 @@ public class ServerWindow extends JFrame {
     private JTextArea jMassage = new JTextArea();
     private JScrollPane jScrollPane = new JScrollPane(jMassage);
     private ServerComponent serverComponent;
+
 
     public ServerWindow() {
         setTitle("Server");
@@ -30,6 +32,10 @@ public class ServerWindow extends JFrame {
             roomField.setEnabled(false);
             try {
                 serverComponent = new ServerComponent();
+                ClientThread clientThread = new ClientThread(jMassage, serverComponent);
+                Thread thread = new Thread(clientThread);
+                thread.start();
+
             } catch (IOException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Connection from client is failed");
