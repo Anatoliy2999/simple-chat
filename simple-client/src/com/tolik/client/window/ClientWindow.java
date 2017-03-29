@@ -7,6 +7,9 @@ import java.awt.*;
 import java.io.IOException;
 
 public class ClientWindow extends JFrame {
+
+    private static final String EMPTY_STRING = "";
+
     private JTextField roomField = new JTextField();
     private JLabel labelRoom = new JLabel("Room");
     private JLabel labelName = new JLabel("Nick name");
@@ -48,17 +51,19 @@ public class ClientWindow extends JFrame {
                 JOptionPane.showMessageDialog(null, "Please fill all field!!!");
                 return;
             }
-            connectButton.setEnabled(false);
-            disconnectButton.setEnabled(true);
-            roomField.setEnabled(false);
-            nameField.setEnabled(false);
-            inputField.setEnabled(true);
-            sendButton.setEnabled(true);
+
             try {
                 clientComponent = new ClientComponent();
+
+                connectButton.setEnabled(false);
+                disconnectButton.setEnabled(true);
+                roomField.setEnabled(false);
+                nameField.setEnabled(false);
+                inputField.setEnabled(true);
+                sendButton.setEnabled(true);
             } catch (IOException e1) {
                 e1.printStackTrace();
-                JOptionPane.showMessageDialog(null,"Connection failed");
+                JOptionPane.showMessageDialog(null, "Connection failed");
             }
         });
 
@@ -69,6 +74,8 @@ public class ClientWindow extends JFrame {
             nameField.setEnabled(true);
             inputField.setEnabled(false);
             sendButton.setEnabled(false);
+
+            clientComponent.destroy();
         });
 
         add(connectionPanel, BorderLayout.PAGE_START);
@@ -82,6 +89,7 @@ public class ClientWindow extends JFrame {
             String massage = inputField.getText();
             if (!massage.isEmpty()) {
                 clientComponent.sendMessage(String.format("%s: %s", nikName, massage));
+                inputField.setText(EMPTY_STRING);
             }
         });
 
