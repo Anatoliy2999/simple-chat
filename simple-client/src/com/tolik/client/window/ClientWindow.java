@@ -54,13 +54,17 @@ public class ClientWindow extends JFrame {
 
             try {
                 clientComponent = new ClientComponent();
-
-                connectButton.setEnabled(false);
-                disconnectButton.setEnabled(true);
-                roomField.setEnabled(false);
-                nameField.setEnabled(false);
-                inputField.setEnabled(true);
-                sendButton.setEnabled(true);
+                if (clientComponent.checkRoom(roomField.getText())) {
+                    connectButton.setEnabled(false);
+                    disconnectButton.setEnabled(true);
+                    roomField.setEnabled(false);
+                    nameField.setEnabled(false);
+                    inputField.setEnabled(true);
+                    sendButton.setEnabled(true);
+                } else {
+                    clientComponent.destroy();
+                    JOptionPane.showMessageDialog(null,"We can't find room " + roomField.getText() + ".");
+                }
             } catch (IOException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Connection failed");

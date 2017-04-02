@@ -9,10 +9,10 @@ public class ServerComponent {
     private ServerSocket serverSocket;
     private JTextArea jMessage;
 
-    public ServerComponent(JTextArea jMessage) throws IOException {
+    public ServerComponent(JTextArea jMessage, String roomName) throws IOException {
         this.jMessage = jMessage;
         serverSocket = new ServerSocket(6666);
-        ClientThread clientThread = new ClientThread(jMessage, serverSocket);
+        ClientThread clientThread = new ClientThread(jMessage, serverSocket, roomName);
         Thread thread = new Thread(clientThread);
         thread.start();
     }

@@ -29,7 +29,7 @@ public class ServerWindow extends JFrame {
             openRoomButton.setEnabled(false);
             roomField.setEnabled(false);
             try {
-                serverComponent = new ServerComponent(jMessage);
+                serverComponent = new ServerComponent(jMessage, roomField.getText());
             } catch (IOException e1) {
                 e1.printStackTrace();
                 JOptionPane.showMessageDialog(null, "Connection from client is failed");
